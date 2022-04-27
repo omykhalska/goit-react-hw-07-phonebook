@@ -5,6 +5,7 @@ export const ContactItem = styled.li`
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
 
   padding: 0.5rem;
 
@@ -15,4 +16,10 @@ export const ContactItem = styled.li`
   &:hover {
     background-color: #f8fcfd;
   }
+`;
+
+export const ContactText = styled.p`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;

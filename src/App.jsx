@@ -1,13 +1,27 @@
-import { useSelector } from 'react-redux';
-import { getItems } from './redux/selectors';
 import { Toaster } from 'react-hot-toast';
+import { useGetContactsQuery } from './redux/contactsSlice';
 import PhonebookForm from './components/PhonebookForm';
 import ContactsList from './components/ContactsList';
 import Filter from './components/Filter';
 import { Container, MainTitle, Title, Message } from './App.styled';
+import Loader from 'components/Loader';
 
 function App() {
-  const contacts = useSelector(getItems);
+  const { data, error, isFetching } = useGetContactsQuery();
+
+  const showContactsSection = contacts => (
+    <>
+      {contacts.length === 0 ? (
+        <Message>Your phonebook is empty, add your first contact!</Message>
+      ) : (
+        <>
+          <Title>Contacts</Title>
+          <Filter />
+          <ContactsList contacts={contacts} />
+        </>
+      )}
+    </>
+  );
 
   return (
     <Container>
@@ -16,15 +30,9 @@ function App() {
       </div>
       <MainTitle>Phonebook</MainTitle>
       <PhonebookForm />
-      {contacts.length === 0 ? (
-        <Message>Your phone book is empty, enter your first contact!</Message>
-      ) : (
-        <>
-          <Title>Contacts</Title>
-          <Filter />
-          <ContactsList />
-        </>
-      )}
+      {isFetching && <Loader config={{ height: '48', width: '48' }} />}
+      {data && showContactsSection(data)}
+      {error && <div>Something went wrong...</div>}
     </Container>
   );
 }

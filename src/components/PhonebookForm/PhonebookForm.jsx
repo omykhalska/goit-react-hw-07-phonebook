@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../redux/contactsSlice';
+// import { addItem } from '../../redux/filterSlice';
 import { getItems } from '../../redux/selectors';
 import { nanoid } from 'nanoid';
 import toast from 'react-hot-toast';
@@ -9,7 +9,7 @@ import { FormWrapper, Label, Input, ErrorText } from './PhonebookForm.styled';
 
 function PhonebookForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getItems);
+  // const contacts = useSelector(getItems);
 
   const {
     register,
@@ -21,9 +21,9 @@ function PhonebookForm() {
   });
 
   const onSubmit = ({ name, number }) => {
-    contacts.some(contact => contact.name === name)
-      ? toast.error(`${name} is already in contacts`)
-      : dispatch(addItem({ name, number, id: nanoid() }));
+    // contacts.some(contact => contact.name === name)
+    //   ? toast.error(`${name} is already in contacts`)
+    //   : dispatch(addItem({ name, number, id: nanoid() }));
     reset();
   };
 
