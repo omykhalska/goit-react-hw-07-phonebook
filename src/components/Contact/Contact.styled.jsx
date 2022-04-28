@@ -19,6 +19,7 @@ export const ContactItem = styled.li`
 `;
 
 export const ContactText = styled.p`
+  line-height: 1.8;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

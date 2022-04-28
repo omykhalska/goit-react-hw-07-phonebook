@@ -1,9 +1,16 @@
 import { useForm } from 'react-hook-form';
-// import toast from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import {
+  useAddContactMutation,
+  useGetContactsQuery,
+} from 'redux/contactsSlice';
 import Button from '../Button';
 import { FormWrapper, Label, Input, ErrorText } from './PhonebookForm.styled';
 
 function PhonebookForm() {
+  const [addItem] = useAddContactMutation();
+  const { data: contacts } = useGetContactsQuery();
+
   const {
     register,
     reset,
@@ -13,10 +20,10 @@ function PhonebookForm() {
     mode: 'onChange',
   });
 
-  const onSubmit = ({ name, number }) => {
-    // contacts.some(contact => contact.name === name)
-    //   ? toast.error(`${name} is already in contacts`)
-    //   : dispatch(addItem({ name, number, id: nanoid() }));
+  const onSubmit = ({ name, phone }) => {
+    contacts.some(contact => contact.name === name)
+      ? toast.error(`${name} is already in contacts`)
+      : addItem({ name, phone });
     reset();
   };
 
@@ -50,7 +57,7 @@ function PhonebookForm() {
           Phone number
           <Input
             type="tel"
-            {...register('number', {
+            {...register('phone', {
               required: '❌ The field cannot be empty!',
               pattern: {
                 value: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g,
@@ -65,9 +72,9 @@ function PhonebookForm() {
           />
         </Label>
         <div>
-          {errors?.number && (
+          {errors?.phone && (
             <ErrorText>
-              {errors?.number.message || 'An error has occurred...'}
+              {errors?.phone.message || 'An error has occurred...'}
             </ErrorText>
           )}
         </div>

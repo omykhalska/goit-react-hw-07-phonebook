@@ -16,7 +16,7 @@ function App() {
       ) : (
         <>
           <Title>Contacts</Title>
-          <Filter />
+          {contacts.length > 1 ? <Filter /> : null}
           <ContactsList contacts={contacts} />
         </>
       )}

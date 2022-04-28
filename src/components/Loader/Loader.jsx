@@ -1,4 +1,5 @@
 import { ThreeDots } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 import { LoaderBox } from './Loader.styled';
 
 function Loader({
@@ -10,5 +11,9 @@ function Loader({
     </LoaderBox>
   );
 }
+
+Loader.propTypes = {
+  config: PropTypes.object,
+};
 
 export default Loader;
