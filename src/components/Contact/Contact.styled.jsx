@@ -18,9 +18,14 @@ export const ContactItem = styled.li`
   }
 `;
 
+export const ContactAvatarBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const ContactText = styled.p`
-  line-height: 1.8;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
 `;

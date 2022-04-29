@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
 import { useDeleteContactMutation } from 'redux/contactsSlice';
 import Button from '../Button';
-import { ContactItem, ContactText } from './Contact.styled';
+import LetterAvatar from '../LetterAvatar';
+import { ContactItem, ContactText, ContactAvatarBox } from './Contact.styled';
 
 function Contact({ name, number, id }) {
   const [deleteItem, { isLoading }] = useDeleteContactMutation();
@@ -15,9 +16,12 @@ function Contact({ name, number, id }) {
 
   return (
     <ContactItem>
-      <ContactText>
-        <b>{name}:</b> {number}
-      </ContactText>
+      <ContactAvatarBox>
+        <LetterAvatar name={name} />
+        <ContactText>
+          <b>{name}:</b> {number}
+        </ContactText>
+      </ContactAvatarBox>
       <Button
         label={isLoading ? 'Deleting...' : 'Delete'}
         type="submit"
